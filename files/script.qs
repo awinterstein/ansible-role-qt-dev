@@ -19,7 +19,7 @@ Controller.prototype.IntroductionPageCallback = function() {
 
 Controller.prototype.TargetDirectoryPageCallback = function()
 {
-    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("HomeDir") + "/Qt5.9.0");
+    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("HomeDir") + "/tools/qt");
     gui.clickButton(buttons.NextButton);
 }
 
@@ -27,8 +27,8 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
     var widget = gui.currentPageWidget();
 
     widget.selectAll();
-    widget.deselectComponent("qt.59.src");
-    widget.deselectComponent("qt.59.android_x86");
+    widget.deselectComponent("qt.592.src");
+    widget.deselectComponent("qt.592.android_x86");
 
     gui.clickButton(buttons.NextButton);
 }
