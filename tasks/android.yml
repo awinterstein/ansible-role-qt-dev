@@ -1,0 +1,72 @@
+---
+- name: Install Android SDK dependencies
+  apt: name={{item}} state=installed
+  with_items:
+    - default-jdk
+    - android-tools-adb
+    - ant
+  become: true
+
+- file:
+    path: "{{homedir}}/tools/download_cache"
+    state: directory
+
+- file:
+    path: "{{homedir}}/tools/android-sdk"
+    state: directory
+
+- file:
+    path: "{{homedir}}/tools/android-sdk/licenses"
+    state: directory
+
+- name: Download Android SDK
+  get_url:
+    url: https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+    dest: "{{homedir}}/tools/download_cache/sdk-tools-linux-3859397.zip"
+
+- name: Unpack Android SDK
+  unarchive:
+    src: "{{homedir}}/tools/download_cache/sdk-tools-linux-3859397.zip"
+    dest: "{{homedir}}/tools/android-sdk"
+    copy: no
+    remote_src: yes
+    creates: "{{homedir}}/tools/android-sdk/tools/bin"
+
+- name: Copy Android SDK license file
+  copy:
+    src: android-sdk-license
+    dest: "{{homedir}}/tools/android-sdk/licenses/android-sdk-license"
+
+- name: Install Android platform tools
+  command: "{{homedir}}/tools/android-sdk/tools/bin/sdkmanager \"platform-tools\""
+  args:
+    creates: "{{homedir}}/tools/android-sdk/platform-tools/"
+
+- name: Install Android build tools
+  command: "{{homedir}}/tools/android-sdk/tools/bin/sdkmanager \"build-tools;25.0.3\""
+  args:
+    creates: "{{homedir}}/tools/android-sdk/build-tools/"
+
+- name: Install Android platform
+  command: "{{homedir}}/tools/android-sdk/tools/bin/sdkmanager \"platforms;android-25\""
+  args:
+    creates: "{{homedir}}/tools/android-sdk/platforms/android-25/"
+
+- name: Install Android NDK
+  command: "{{homedir}}/tools/android-sdk/tools/bin/sdkmanager \"ndk-bundle\""
+  args:
+    creates: "{{homedir}}/tools/android-sdk/ndk-bundle/"
+
+- name: QtCreator - Set path for Android SDK
+  lineinfile:
+    destfile: "{{homedir}}/.config/QtProject/QtCreator.ini"
+    regexp: '^SDKLocation='
+    insertafter: "[AndroidConfigurations]"
+    line: "SDKLocation={{homedir}}/tools/android-sdk"
+
+- name: QtCreator - Set path for Android NDK
+  lineinfile:
+    destfile: "{{homedir}}/.config/QtProject/QtCreator.ini"
+    regexp: '^NDKLocation='
+    insertafter: "[AndroidConfigurations]"
+    line: "NDKLocation={{homedir}}/tools/android-sdk/ndk-bundle"
