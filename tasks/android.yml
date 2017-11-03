@@ -12,12 +12,9 @@
     state: directory
 
 - file:
-    path: "{{homedir}}/tools/android-sdk"
-    state: directory
-
-- file:
     path: "{{homedir}}/tools/android-sdk/licenses"
     state: directory
+    recurse: yes
 
 - name: Download Android SDK
   get_url:

@@ -1,3 +1,4 @@
 ---
 - include: qt.yml
 - include: android.yml
+  when: use_android is defined and use_android == true
