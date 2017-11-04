@@ -102,4 +102,4 @@
     destfile: "{{homedir}}/.config/QtProject/QtCreator.ini"
     regexp: '^BuildDirectory.Template='
     insertafter: "[Directories]"
-    line: "BuildDirectory.Template={{homedir}}/build/%{JS: Util.asciify(\"%{CurrentProject:Name}-%{CurrentKit:FileSystemName}-%{CurrentBuild:Name}\")}"
+    line: "BuildDirectory.Template={{homedir}}/build/%{JS: Util.asciify(\\\"%{CurrentProject:Name}-%{CurrentKit:FileSystemName}-%{CurrentBuild:Name}\\\")}"
