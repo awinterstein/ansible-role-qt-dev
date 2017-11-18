@@ -52,7 +52,7 @@
     destfile: "{{homedir}}/.config/plasma-org.kde.plasma.desktop-appletsrc"
     insertafter: '^[Containments][2][Applets][3][Configuration][General]'
     regexp: '^favorites=preferred://.*'
-    line: 'favorites=preferred://browser,systemsettings.desktop,org.kde.dolphin.desktop,DigiaQt-qtcreator-community.desktop'
+    line: 'favorites=preferred://browser,org.kde.dolphin.desktop,org.kde.kate.desktop,DigiaQt-qtcreator-community.desktop,systemsettings.desktop'
 
 - lineinfile:
     destfile: "{{homedir}}/.config/plasma-org.kde.plasma.desktop-appletsrc"
