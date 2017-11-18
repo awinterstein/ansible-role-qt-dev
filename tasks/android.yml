@@ -25,7 +25,6 @@
   unarchive:
     src: "{{homedir}}/tools/download_cache/sdk-tools-linux-3859397.zip"
     dest: "{{homedir}}/tools/android-sdk"
-    copy: no
     remote_src: yes
     creates: "{{homedir}}/tools/android-sdk/tools/bin"
 
