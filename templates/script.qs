@@ -27,7 +27,9 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
     var widget = gui.currentPageWidget();
 
     widget.selectAll();
+{% if not install_qt_src %}
     widget.deselectComponent("qt.592.src");
+{% endif %}
     widget.deselectComponent("qt.592.android_x86");
 
     gui.clickButton(buttons.NextButton);

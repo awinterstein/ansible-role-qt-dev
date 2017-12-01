@@ -18,7 +18,7 @@
   when: qt_installed|failed
 
 - name: Copy Qt installer script
-  copy:
+  template:
     src: script.qs
     dest: /tmp/qt-install/
     owner: vagrant
