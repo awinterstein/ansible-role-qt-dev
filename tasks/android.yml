@@ -79,3 +79,19 @@
     regexp: '^NDKLocation='
     insertafter: "[AndroidConfigurations]"
     line: "NDKLocation={{homedir}}/tools/android-sdk/android-ndk-r10e"
+
+# The extra CMake modules (ECM) of the KDE project can help with android deployment.
+- name: Install extra CMake modules
+  apt:
+    name: extra-cmake-modules
+    state: installed
+    install_recommends: no
+  become: true
+
+# ECM needs the ANDROID_NDK environment variable to be set to build for Android.
+- name: Set Android NDK location as environment variable
+  lineinfile:
+    destfile: "{{homedir}}/.bashrc"
+    regexp: '^export ANDROID_NDK='
+    insertafter: "[AndroidConfigurations]"
+    line: "export ANDROID_NDK={{homedir}}/tools/android-sdk/android-ndk-r10e"
