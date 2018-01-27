@@ -48,10 +48,23 @@
   args:
     creates: "{{homedir}}/tools/android-sdk/platforms/android-25/"
 
-- name: Install Android NDK
-  command: "{{homedir}}/tools/android-sdk/tools/bin/sdkmanager \"ndk-bundle\""
-  args:
-    creates: "{{homedir}}/tools/android-sdk/ndk-bundle/"
+# Install an older version of the Android NDK as Qt might not work with the newest one.
+- name: Download Android NDK
+  get_url:
+    url: https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
+    dest: "{{homedir}}/tools/download_cache/android-ndk-r10e-linux-x86_64.zip"
+
+- name: Unpack Android NDK
+  unarchive:
+    src: "{{homedir}}/tools/download_cache/android-ndk-r10e-linux-x86_64.zip"
+    dest: "{{homedir}}/tools/android-sdk/"
+    remote_src: yes
+    creates: "{{homedir}}/tools/android-sdk/android-ndk-r10e"
+
+#- name: Install Android NDK
+#  command: "{{homedir}}/tools/android-sdk/tools/bin/sdkmanager \"ndk-bundle\""
+#  args:
+#    creates: "{{homedir}}/tools/android-sdk/ndk-bundle/"
 
 - name: QtCreator - Set path for Android SDK
   lineinfile:
@@ -65,4 +78,4 @@
     destfile: "{{homedir}}/.config/QtProject/QtCreator.ini"
     regexp: '^NDKLocation='
     insertafter: "[AndroidConfigurations]"
-    line: "NDKLocation={{homedir}}/tools/android-sdk/ndk-bundle"
+    line: "NDKLocation={{homedir}}/tools/android-sdk/android-ndk-r10e"
