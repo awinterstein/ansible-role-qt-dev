@@ -1,40 +1,32 @@
 ---
-# Check whether Qt is already installed
-- command: test -d {{homedir}}/tools/qt
-  register: qt_installed
-  ignore_errors: True
-
 - name: Create directory for Qt installer files
   file:
-    path: /tmp/qt-install
+    path: "{{toolsdir}}/download_cache"
     state: directory
-  when: qt_installed|failed
+
+- name: Create directory for Qt installer script file
+  file:
+    path: /var/lib/ansible/qt
+    state: directory
 
 - name: Download Qt
   get_url:
     url: https://download.qt.io/official_releases/qt/5.9/5.9.2/qt-opensource-linux-x64-5.9.2.run
-    dest: /tmp/qt-install/qt-installer.run
+    dest: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-5.9.2.run"
     mode: 0550
-  when: qt_installed|failed
 
 - name: Copy Qt installer script
   template:
     src: script.qs
-    dest: /tmp/qt-install/
+    dest: /var/lib/ansible/qt
     owner: vagrant
     group: vagrant
     mode: 0644
-  when: qt_installed|failed
 
 - name: Install Qt
-  shell: /tmp/qt-install/qt-installer.run --platform minimal --script /tmp/qt-install/script.qs
-  when: qt_installed|failed
-
-- name: Clean up Qt installer files
-  file:
-    state: absent
-    path: /tmp/qt-install
-  when: qt_installed|failed
+  shell: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-5.9.2.run --platform minimal --script /var/lib/ansible/qt/script.qs"
+  args:
+    creates: "{{toolsdir}}/qt/5.9.2/"
 
 - name: Install mesa development headers (for Qt gui development)
   apt: name={{item}} state=installed
