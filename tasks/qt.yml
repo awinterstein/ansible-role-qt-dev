@@ -33,6 +33,7 @@
   with_items:
     - mesa-common-dev
     - libgl1-mesa-dev
+    - libgles2-mesa-dev # necessary for Raspberry Pi cross compiling
   become: true
 
 - lineinfile:
