@@ -8,6 +8,9 @@
   file:
     path: /var/lib/ansible/qt
     state: directory
+    owner: vagrant
+    group: vagrant
+  become: true
 
 - name: Download Qt
   get_url:
