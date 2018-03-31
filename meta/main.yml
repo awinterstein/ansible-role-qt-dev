@@ -1,6 +1,7 @@
 ---
 dependencies:
   - { role: git }
+  - { role: dev-helpers }
 
 galaxy_info:
   author: awinterstein
