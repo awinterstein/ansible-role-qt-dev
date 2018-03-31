@@ -1,4 +1,4 @@
-qt_version: 5.9.2
+qt_version: 5.10.1
 install_qt_src: false
 use_android: false
 use_raspi: false
