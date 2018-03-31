@@ -6,7 +6,7 @@ SYSROOT_DIR="{{toolsdir}}/raspberrypi-qt/sysroot/"
 
 mkdir -p "$SYSROOT_DIR"
 
-rsync -avz --delete $RASPI_USER@$RASPI_ADDRESS:/lib :/usr/include :/usr/lib :/opt/vc "$SYSROOT_DIR"
+rsync -avzR --delete $RASPI_USER@$RASPI_ADDRESS:/lib :/usr/include :/usr/lib :/opt/vc "$SYSROOT_DIR"
 
 sysroot-relativelinks "$SYSROOT_DIR"
 
