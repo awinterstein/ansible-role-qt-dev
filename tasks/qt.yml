@@ -14,8 +14,8 @@
 
 - name: Download Qt
   get_url:
-    url: https://download.qt.io/official_releases/qt/5.9/5.9.2/qt-opensource-linux-x64-5.9.2.run
-    dest: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-5.9.2.run"
+    url: https://download.qt.io/official_releases/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run
+    dest: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-5.10.1.run"
     mode: 0550
 
 - name: Copy Qt installer script
@@ -27,9 +27,9 @@
     mode: 0644
 
 - name: Install Qt
-  shell: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-5.9.2.run --platform minimal --script /var/lib/ansible/qt/script.qs"
+  shell: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-5.10.1.run --platform minimal --script /var/lib/ansible/qt/script.qs"
   args:
-    creates: "{{toolsdir}}/qt/5.9.2/"
+    creates: "{{toolsdir}}/qt/5.10.1/"
 
 - name: Install mesa development headers (for Qt gui development)
   apt: name={{item}} state=installed

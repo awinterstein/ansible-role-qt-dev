@@ -1,3 +1,5 @@
+// https://github.com/Subsurface-divelog/subsurface/blob/master/qt-installer-noninteractive.qs
+
 function Controller() {
     installer.autoRejectMessageBoxes();
     installer.installationFinished.connect(function() {
@@ -6,7 +8,7 @@ function Controller() {
 }
 
 Controller.prototype.WelcomePageCallback = function() {
-    gui.clickButton(buttons.NextButton);
+    gui.clickButton(buttons.NextButton,3000);
 }
 
 Controller.prototype.CredentialsPageCallback = function() {
@@ -28,9 +30,9 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
 
     widget.selectAll();
 {% if not install_qt_src %}
-    widget.deselectComponent("qt.592.src");
+    widget.deselectComponent("qt.5101.src");
 {% endif %}
-    widget.deselectComponent("qt.592.android_x86");
+    widget.deselectComponent("qt.5101.android_x86");
 
     gui.clickButton(buttons.NextButton);
 }
