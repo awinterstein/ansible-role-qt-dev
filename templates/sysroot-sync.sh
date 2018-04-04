@@ -10,4 +10,6 @@ rsync -avzR --delete $RASPI_USER@$RASPI_ADDRESS:/lib :/usr/include :/usr/lib :/o
 
 sysroot-relativelinks "$SYSROOT_DIR"
 
-tar cfj "{{homedir}}/raspi_sysroot.tbz2" "$SYSROOT_DIR"
+pushd "$SYSROOT_DIR"
+tar cfj "{{homedir}}/raspi_sysroot.tbz2" "."
+popd
