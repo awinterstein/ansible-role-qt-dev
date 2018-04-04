@@ -19,3 +19,21 @@
     - cross-compile-qt.sh
     - qt-sync.sh
   become: true
+
+- name: Create directories for the Raspberry Pi sysroot and Qt
+  file: path="{{toolsdir}}/raspberrypi-qt/{{item}}" state=directory owner=vagrant group=vagrant
+  with_items:
+    - sysroot
+    - qt5pi
+
+- name: Download and extract Raspberry Pi sysroot
+  unarchive:
+    src: http://soracum.cerritus.eu/raspi_sysroot.tbz2
+    dest: "{{toolsdir}}/raspberrypi-qt/sysroot/"
+    remote_src: yes
+
+- name: Download and extract Qt for the Raspberry Pi
+  unarchive:
+    src: http://soracum.cerritus.eu/raspi_qt-5.10.1.tbz2
+    dest: "{{toolsdir}}/raspberrypi-qt/qt5pi/"
+    remote_src: yes
