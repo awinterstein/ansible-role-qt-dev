@@ -12,3 +12,7 @@ make install
 pushd "{{toolsdir}}/raspberrypi-qt/qt5pi/"
 tar cfj "{{homedir}}/raspi_qt-{{qt_version}}.tbz2" "."
 popd
+
+pushd "{{toolsdir}}/raspberrypi-qt/qt5/"
+tar cfj "{{homedir}}/raspi_host_qt-{{qt_version}}.tbz2" "."
+popd
