@@ -24,16 +24,26 @@
   file: path="{{toolsdir}}/raspberrypi-qt/{{item}}" state=directory owner=vagrant group=vagrant
   with_items:
     - sysroot
+    - qt5
     - qt5pi
 
 - name: Download and extract Raspberry Pi sysroot
   unarchive:
     src: http://soracum.cerritus.eu/raspi_sysroot.tbz2
     dest: "{{toolsdir}}/raspberrypi-qt/sysroot/"
+    creates: "{{toolsdir}}/raspberrypi-qt/sysroot/lib"
+    remote_src: yes
+
+- name: Download and extract Qt host tools for the Raspberry Pi
+  unarchive:
+    src: http://soracum.cerritus.eu/raspi_host_qt-5.10.1.tbz2
+    dest: "{{toolsdir}}/raspberrypi-qt/qt5/"
+    creates: "{{toolsdir}}/raspberrypi-qt/qt5/bin"
     remote_src: yes
 
 - name: Download and extract Qt for the Raspberry Pi
   unarchive:
     src: http://soracum.cerritus.eu/raspi_qt-5.10.1.tbz2
     dest: "{{toolsdir}}/raspberrypi-qt/qt5pi/"
+    creates: "{{toolsdir}}/raspberrypi-qt/qt5pi/bin"
     remote_src: yes
