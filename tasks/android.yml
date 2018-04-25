@@ -80,6 +80,12 @@
     insertafter: "[AndroidConfigurations]"
     line: "NDKLocation={{homedir}}/tools/android-sdk/android-ndk-r10e"
 
+- name: Copy udev rules to use Android devices without root permissions
+  copy:
+    src: 90-android-device.rules
+    dest: /etc/udev/rules.d/90-android-device.rules
+  become: true
+
 # The extra CMake modules (ECM) of the KDE project can help with android deployment.
 - name: Install extra CMake modules
   apt:
