@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Network>
+    <ProxyType>1</ProxyType>
+    <Ftp>
+        <Host></Host>
+        <Port>0</Port>
+        <Username></Username>
+        <Password></Password>
+    </Ftp>
+    <Http>
+        <Host></Host>
+        <Port>0</Port>
+        <Username></Username>
+        <Password></Password>
+    </Http>
+    <Repositories>
+        <Repository>
+            <Host>http://download.qt.io/online/qtsdkrepository/linux_x64/desktop/tools_maintenance/</Host>
+            <Username></Username>
+            <Password></Password>
+            <Enabled>1</Enabled>
+        </Repository>
+    </Repositories>
+</Network>

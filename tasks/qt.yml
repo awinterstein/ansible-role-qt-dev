@@ -31,6 +31,12 @@
   args:
     creates: "{{toolsdir}}/qt/5.10.1/"
 
+# This can hopefully be removed for future Qt versions.
+- name: Make sure that the Qt Maintenance Tool has a repository available
+  copy:
+    src: qt-maintenance-network.xml
+    dest: "{{toolsdir}}/qt/network.xml"
+
 - name: Install mesa development headers (for Qt gui development)
   apt: name={{item}} state=present
   with_items:
