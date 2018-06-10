@@ -112,3 +112,10 @@
     owner: vagrant
     group: vagrant
     mode: 0644
+- name: QtCreator - Copy debugger configurations
+  template:
+    src: qtcreator/debuggers.xml
+    dest: "{{homedir}}/.config/QtProject/qtcreator/debuggers.xml"
+    owner: vagrant
+    group: vagrant
+    mode: 0644
