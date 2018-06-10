@@ -105,3 +105,10 @@
     regexp: '^BuildDirectory.Template='
     insertafter: "[Directories]"
     line: "BuildDirectory.Template={{homedir}}/build/%{JS: Util.asciify(\\\"%{CurrentProject:Name}-%{CurrentKit:FileSystemName}-%{CurrentBuild:Name}\\\")}"
+- name: QtCreator - Copy device configurations
+  template:
+    src: qtcreator/devices.xml
+    dest: "{{homedir}}/.config/QtProject/qtcreator/devices.xml"
+    owner: vagrant
+    group: vagrant
+    mode: 0644
