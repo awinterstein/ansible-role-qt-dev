@@ -119,3 +119,10 @@
     owner: vagrant
     group: vagrant
     mode: 0644
+- name: QtCreator - Copy toolchain configurations
+  template:
+    src: qtcreator/toolchains.xml
+    dest: "{{homedir}}/.config/QtProject/qtcreator/toolchains.xml"
+    owner: vagrant
+    group: vagrant
+    mode: 0644
