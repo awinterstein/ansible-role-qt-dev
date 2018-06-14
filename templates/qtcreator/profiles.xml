@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProfiles>
 <qtcreator>
-  <data>
+ <data>
   <variable>Profile.0</variable>
   <valuemap type="QVariantMap">
    <value type="bool" key="PE.Profile.AutoDetected">false</value>
@@ -31,7 +31,7 @@
      <value type="QByteArray" key="Cxx">{2a1679b5-1fdb-4002-b2e6-ba8367a56808}</value>
     </valuemap>
     <value type="QString" key="QtPM4.mkSpecInformation"></value>
-    <value type="int" key="QtSupport.QtInformation">-1</value>
+    <value type="int" key="QtSupport.QtInformation">4</value>
    </valuemap>
    <value type="QString" key="PE.Profile.Icon"></value>
    <value type="QString" key="PE.Profile.Id">{c9e2acbd-aa35-4c63-9876-c11442f04e91}</value>
