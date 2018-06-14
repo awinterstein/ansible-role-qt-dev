@@ -25,7 +25,7 @@
     <value type="QString" key="PE.Profile.Device">{91733a46-4d02-4ee1-a500-ff586d66b818}</value>
     <value type="QString" key="PE.Profile.DeviceType">GenericLinuxOsType</value>
     <valuelist type="QVariantList" key="PE.Profile.Environment"/>
-    <value type="QString" key="PE.Profile.SysRoot">{{toolsdir}}/raspberrypi-qt/sysroot</value>
+    <value type="QString" key="PE.Profile.SysRoot">{{toolsdir}}/toolchains/arm-rpi-linux-gnueabihf/arm-rpi-linux-gnueabihf/sysroot</value>
     <valuemap type="QVariantMap" key="PE.Profile.ToolChainsV3">
      <value type="QByteArray" key="C">{a1ec6b53-8b0a-4d77-910a-98069e019fb1}</value>
      <value type="QByteArray" key="Cxx">{2a1679b5-1fdb-4002-b2e6-ba8367a56808}</value>
