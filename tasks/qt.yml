@@ -105,3 +105,9 @@
     regexp: '^BuildDirectory.Template='
     insertafter: "[Directories]"
     line: "BuildDirectory.Template={{homedir}}/build/%{JS: Util.asciify(\\\"%{CurrentProject:Name}-%{CurrentKit:FileSystemName}-%{CurrentBuild:Name}\\\")}"
+
+- name: Download the linuxdeployqt AppImage
+  get_url:
+    url: https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+    dest: /usr/local/bin/linuxdeployqt
+    mode: 0755
