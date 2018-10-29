@@ -21,7 +21,7 @@ Controller.prototype.IntroductionPageCallback = function() {
 
 Controller.prototype.TargetDirectoryPageCallback = function()
 {
-    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("HomeDir") + "/tools/qt");
+    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("HomeDir") + "/tools/qt-5.11");
     gui.clickButton(buttons.NextButton);
 }
 
@@ -30,9 +30,9 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
 
     widget.selectAll();
 {% if not install_qt_src %}
-    widget.deselectComponent("qt.5101.src");
+    widget.deselectComponent("qt.5112.src");
 {% endif %}
-    widget.deselectComponent("qt.5101.android_x86");
+    widget.deselectComponent("qt.5112.android_x86");
 
     gui.clickButton(buttons.NextButton);
 }
