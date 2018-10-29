@@ -14,8 +14,8 @@
 
 - name: Download Qt
   get_url:
-    url: https://download.qt.io/official_releases/qt/5.11/5.11.2/qt-opensource-linux-x64-5.11.2.run
-    dest: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-5.11.2.run"
+    url: https://download.qt.io/official_releases/qt/{{qt_version_major}}/{{qt_version_full}}/qt-opensource-linux-x64-{{qt_version_full}}.run
+    dest: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-{{qt_version_full}}.run"
     mode: 0550
 
 - name: Copy Qt installer script
@@ -27,15 +27,15 @@
     mode: 0644
 
 - name: Install Qt
-  shell: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-5.11.2.run --platform minimal --script /var/lib/ansible/qt/script.qs"
+  shell: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-{{qt_version_full}}.run --platform minimal --script /var/lib/ansible/qt/script.qs"
   args:
-    creates: "{{toolsdir}}/qt/5.11.2/"
+    creates: "{{toolsdir}}/qt-{{qt_version_major}}/{{qt_version_full}}/"
 
 # This can hopefully be removed for future Qt versions.
 - name: Make sure that the Qt Maintenance Tool has a repository available
   copy:
     src: qt-maintenance-network.xml
-    dest: "{{toolsdir}}/qt/network.xml"
+    dest: "{{toolsdir}}/qt-{{qt_version_major}}/network.xml"
 
 - name: Install mesa development headers (for Qt gui development)
   apt: name={{item}} state=present
@@ -111,3 +111,4 @@
     url: https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
     dest: /usr/local/bin/linuxdeployqt
     mode: 0755
+  become: true
