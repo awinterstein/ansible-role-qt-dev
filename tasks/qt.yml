@@ -38,11 +38,9 @@
     dest: "{{toolsdir}}/qt-{{qt_version_major}}/network.xml"
 
 - name: Install mesa development headers (for Qt gui development)
-  apt: name={{item}} state=present
-  with_items:
-    - mesa-common-dev
-    - libgl1-mesa-dev
-    - libgles2-mesa-dev # necessary for Raspberry Pi cross compiling
+  apt:
+    name: ['mesa-common-dev', 'libgl1-mesa-dev']
+    state: present
   become: true
 
 - lineinfile:

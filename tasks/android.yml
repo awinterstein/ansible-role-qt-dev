@@ -1,10 +1,8 @@
 ---
 - name: Install Android SDK dependencies
-  apt: name={{item}} state=present
-  with_items:
-    - default-jdk
-    - android-tools-adb
-    - ant
+  apt:
+    name: ['default-jdk', 'android-tools-adb', 'ant']
+    state: present
   become: true
 
 - file:

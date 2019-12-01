@@ -1,4 +1,10 @@
 ---
+- name: Install additional mesa development headers (for Qt gui development)
+  apt:
+    name: ['libgles2-mesa-dev']
+    state: present
+  become: true
+
 - name: Clone repository containing the Raspberry Pi toolchain
   git:
     repo: 'https://github.com/raspberrypi/tools.git'
