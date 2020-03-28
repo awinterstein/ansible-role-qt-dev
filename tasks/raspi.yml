@@ -27,7 +27,7 @@
   become: true
 
 - name: Create directories for the Raspberry Pi sysroot and Qt
-  file: path="{{toolsdir}}/raspberrypi-qt/{{item}}" state=directory owner=vagrant group=vagrant
+  file: path="{{toolsdir}}/raspberrypi-qt/{{item}}" state=directory owner="{{user}}" group="{{user}}"
   with_items:
     - sysroot
     - qt5
@@ -42,21 +42,21 @@
 
 - name: Download and extract Qt host tools for the Raspberry Pi
   unarchive:
-    src: http://soracum.cerritus.eu/raspi_host_qt-5.10.1.tbz2
+    src: "http://soracum.cerritus.eu/raspi_host_qt-{{qt_version_full}}.tbz2"
     dest: "{{toolsdir}}/raspberrypi-qt/qt5/"
     creates: "{{toolsdir}}/raspberrypi-qt/qt5/bin"
     remote_src: yes
 
 - name: Download and extract Qt for the Raspberry Pi
   unarchive:
-    src: http://soracum.cerritus.eu/raspi_qt-5.10.1.tbz2
+    src: "http://soracum.cerritus.eu/raspi_qt-{{qt_version_full}}.tbz2"
     dest: "{{toolsdir}}/raspberrypi-qt/qt5pi/"
     creates: "{{toolsdir}}/raspberrypi-qt/qt5pi/bin"
     remote_src: yes
 
 - name: QtCreator - Copy configurations configurations
   template:
-    src: qtcreator/{{item}}
+    src: "qtcreator/{{item}}"
     dest: "{{homedir}}/.config/QtProject/qtcreator/{{item}}"
     owner: vagrant
     group: vagrant
