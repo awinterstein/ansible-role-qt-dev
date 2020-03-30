@@ -1,41 +1,10 @@
 ---
-- name: Create directory for Qt installer files
-  file:
-    path: "{{toolsdir}}/download_cache"
-    state: directory
-
-- name: Create directory for Qt installer script file
-  file:
-    path: /var/lib/ansible/qt
-    state: directory
-    owner: vagrant
-    group: vagrant
-  become: true
-
-- name: Download Qt
-  get_url:
-    url: https://download.qt.io/official_releases/qt/{{qt_version_major}}/{{qt_version_full}}/qt-opensource-linux-x64-{{qt_version_full}}.run
-    dest: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-{{qt_version_full}}.run"
-    mode: 0550
-
-- name: Copy Qt installer script
-  template:
-    src: script.qs
-    dest: /var/lib/ansible/qt
-    owner: vagrant
-    group: vagrant
-    mode: 0644
-
-- name: Install Qt
-  shell: "{{toolsdir}}/download_cache/qt-opensource-linux-x64-{{qt_version_full}}.run --platform minimal --script /var/lib/ansible/qt/script.qs"
-  args:
-    creates: "{{toolsdir}}/qt-{{qt_version_major}}/{{qt_version_full}}/"
-
-# This can hopefully be removed for future Qt versions.
-- name: Make sure that the Qt Maintenance Tool has a repository available
-  copy:
-    src: qt-maintenance-network.xml
-    dest: "{{toolsdir}}/qt-{{qt_version_major}}/network.xml"
+- name: Clone the Qt source repository
+  git:
+    repo: 'git://code.qt.io/qt/qt5.git'
+    dest: "{{toolsdir}}/qt5-src"
+    version: "v{{qt_version_major}}.{{qt_version_minor}}"
+    force: yes
 
 - name: Install mesa development headers (for Qt gui development)
   apt:
