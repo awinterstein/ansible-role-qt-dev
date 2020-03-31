@@ -1,7 +1,6 @@
 qt_version_major: 5.14
 qt_version_minor: 1
 qt_version_full: "{{qt_version_major}}.{{qt_version_minor}}"
-install_qt_src: false
 use_android: false
 use_raspi: false
 raspi_user: pi

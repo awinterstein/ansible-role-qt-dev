@@ -5,23 +5,9 @@
     state: present
   become: true
 
-- name: Clone repository containing the Raspberry Pi toolchain
-  git:
-    repo: 'https://github.com/raspberrypi/tools.git'
-    dest: "{{homedir}}/tools/raspberrypi-tools/"
-    depth: 1
-
-- name: Copy script for adapting absolute paths in the sysroot
-  copy:
-    src: sysroot-relativelinks.py
-    dest: /usr/local/bin/sysroot-relativelinks
-    mode: 0755
-  become: true
-
 - name: Copy Qt cross compilation scripts
   template: src={{item}} dest=/usr/local/bin/ mode=0755
   with_items:
-    - sysroot-sync.sh
     - cross-compile-qt.sh
     - qt-sync.sh
   become: true
@@ -29,7 +15,6 @@
 - name: Create directories for the Raspberry Pi sysroot and Qt
   file: path="{{toolsdir}}/raspberrypi-qt/{{item}}" state=directory owner="{{user}}" group="{{user}}"
   with_items:
-    - sysroot
     - qt5
     - qt5pi
 
