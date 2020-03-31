@@ -5,7 +5,7 @@ SYSROOT_DIR="{{toolsdir}}/toolchains/arm-rpi-linux-gnueabihf/arm-rpi-linux-gnuea
 
 cd "{{toolsdir}}/qt5-src/"
 ./init-repository --module-subset=default,-qtwebengine --branch
-./configure -release -opengl es2 -device $RASPI_VERSION -device-option CROSS_COMPILE="{{toolsdir}}/toolchains/arm-rpi-linux-gnueabihf/bin/arm-rpi-linux-gnueabihf-" -sysroot "$SYSROOT_DIR" -opensource -confirm-license -make libs -make tools -prefix /usr/local/qt -extprefix "{{toolsdir}}/raspberrypi-qt/qt5pi/" -hostprefix "{{toolsdir}}/raspberrypi-qt/qt5/" -no-use-gold-linker -no-gbm -skip qtwebengine
+./configure -release -opengl es2 -device $RASPI_VERSION -device-option CROSS_COMPILE="{{toolsdir}}/toolchains/arm-rpi-linux-gnueabihf/bin/arm-rpi-linux-gnueabihf-" -sysroot "$SYSROOT_DIR" -opensource -confirm-license -make libs -make tools -prefix /usr/local/qt -extprefix "{{toolsdir}}/raspberrypi-qt/qt5pi/" -hostprefix "{{toolsdir}}/raspberrypi-qt/qt5/" -no-use-gold-linker -no-gbm -skip qtwebengine -skip qtdocgallery
 
 make -j8
 make install
