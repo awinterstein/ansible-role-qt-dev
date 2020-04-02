@@ -18,13 +18,6 @@
     - qt5
     - qt5pi
 
-- name: Download and extract Raspberry Pi sysroot
-  unarchive:
-    src: http://soracum.cerritus.eu/raspi_sysroot.tbz2
-    dest: "{{toolsdir}}/raspberrypi-qt/sysroot/"
-    creates: "{{toolsdir}}/raspberrypi-qt/sysroot/lib"
-    remote_src: yes
-
 - name: Download and extract Qt host tools for the Raspberry Pi
   unarchive:
     src: "http://soracum.cerritus.eu/raspi_host_qt-{{qt_version_full}}.tbz2"
