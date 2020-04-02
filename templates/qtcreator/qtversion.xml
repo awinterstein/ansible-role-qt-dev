@@ -12,6 +12,16 @@
   </valuemap>
  </data>
  <data>
+  <variable>QtVersion.1</variable>
+  <valuemap type="QVariantMap">
+   <value type="int" key="Id">10</value>
+   <value type="QString" key="Name">Qt %{Qt:Version} (x86_64)</value>
+   <value type="QString" key="QMakePath">/home/vagrant/tools/qt-5.14.1/x86_64/bin/qmake</value>
+   <value type="QString" key="QtVersion.Type">Qt4ProjectManager.QtVersion.Desktop</value>
+   <value type="bool" key="isAutodetected">false</value>
+  </valuemap>
+ </data>
+ <data>
   <variable>Version</variable>
   <value type="int">1</value>
  </data>
