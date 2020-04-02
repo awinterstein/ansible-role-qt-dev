@@ -9,7 +9,7 @@
    </valuelist>
    <value type="bool" key="AutoDetected">false</value>
    <value type="QString" key="AutoDetectionSource"></value>
-   <value type="QString" key="Binary">{{toolsdir}}/raspberrypi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gdb</value>
+   <value type="QString" key="Binary">{{toolsdir}}/toolchains/arm-rpi-linux-gnueabihf/bin/arm-rpi-linux-gnueabihf-gdb</value>
    <value type="QString" key="DisplayName">Raspberry Pi Debugger</value>
    <value type="int" key="EngineType">1</value>
    <value type="QString" key="Id">{e06abdff-170c-4f53-9d37-82adefe3b813}</value>
