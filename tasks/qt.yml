@@ -24,6 +24,16 @@
     - host-compile-qt.sh
   become: true
 
+- name: Create directory for Qt
+  file: path="{{toolsdir}}/qt-{{qt_version_full}}/x86_64/" state=directory owner="{{user}}" group="{{user}}"
+
+- name: Download and extract Qt
+  unarchive:
+    src: "http://soracum.cerritus.eu/qt-{{qt_version_full}}-x86_64.tbz2"
+    dest: "{{toolsdir}}/qt-{{qt_version_full}}/x86_64/"
+    creates: "{{toolsdir}}/qt-{{qt_version_full}}/x86_64/bin"
+    remote_src: yes
+
 - name: Install Qt Creator
   apt:
     name: ['qtcreator']
