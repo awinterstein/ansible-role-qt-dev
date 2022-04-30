@@ -1,7 +1,7 @@
 ---
 - name: Install additional mesa development headers (for Qt gui development)
   apt:
-    name: ['libgles2-mesa-dev']
+    name: ["libgles2-mesa-dev"]
     state: present
   become: true
 
@@ -34,20 +34,20 @@
 
 - name: QtCreator - Make sure that the config directory exists
   file:
-    path: "{{homedir}}/.config/QtProject/qtcreator"
+    path: "{{ ansible_env.HOME }}/.config/QtProject/qtcreator"
     state: directory
     recurse: yes
 
 - name: QtCreator - Copy configurations
   template:
     src: "qtcreator/{{item}}"
-    dest: "{{homedir}}/.config/QtProject/qtcreator/{{item}}"
+    dest: "{{ ansible_env.HOME }}/.config/QtProject/qtcreator/{{item}}"
     owner: vagrant
     group: vagrant
     mode: 0644
   with_items:
-  - devices.xml
-  - debuggers.xml
-  - toolchains.xml
-  - profiles.xml
-  - qtversion.xml
+    - devices.xml
+    - debuggers.xml
+    - toolchains.xml
+    - profiles.xml
+    - qtversion.xml

@@ -13,9 +13,9 @@ make -j8
 make install
 
 pushd "{{toolsdir}}/raspberrypi-qt/qt5pi/"
-tar cfj "{{homedir}}/raspi_qt-{{qt_version_full}}.tbz2" "."
+tar cfj "{{ ansible_env.HOME }}/raspi_qt-{{qt_version_full}}.tbz2" "."
 popd
 
 pushd "{{toolsdir}}/raspberrypi-qt/qt5/"
-tar cfj "{{homedir}}/raspi_host_qt-{{qt_version_full}}.tbz2" "."
+tar cfj "{{ ansible_env.HOME }}/raspi_host_qt-{{qt_version_full}}.tbz2" "."
 popd

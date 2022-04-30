@@ -1,22 +1,43 @@
 ---
 - name: Clone the Qt source repository
   git:
-    repo: 'git://code.qt.io/qt/qt5.git'
+    repo: "git://code.qt.io/qt/qt5.git"
     dest: "{{ toolsdir }}/qt5-src"
     version: "v{{ qt_version_major }}.{{ qt_version_minor }}"
     force: yes
 
 - name: Install mesa development headers (for Qt gui development)
   apt:
-    name: ['mesa-common-dev', 'libgl1-mesa-dev']
+    name: ["mesa-common-dev", "libgl1-mesa-dev"]
     state: present
   become: true
 
 - name: Install aditional development packages for compiling Qt
   apt:
-    name: ['libfontconfig1-dev', 'libfreetype6-dev', 'libx11-dev', 'libxext-dev', 'libxfixes-dev', 'libxi-dev', 'libxrender-dev', 'libxcb1-dev',
-           'libx11-xcb-dev', 'libxcb-glx0-dev', 'libxkbcommon-x11-dev', 'libxcb-keysyms1-dev', 'libxcb-image0-dev', 'libxcb-shm0-dev', 'libxcb-icccm4-dev',
-           'libxcb-sync0-dev', 'libxcb-xfixes0-dev', 'libxcb-shape0-dev', 'libxcb-randr0-dev', 'libxcb-render-util0-dev', 'libssl-dev']
+    name:
+      [
+        "libfontconfig1-dev",
+        "libfreetype6-dev",
+        "libx11-dev",
+        "libxext-dev",
+        "libxfixes-dev",
+        "libxi-dev",
+        "libxrender-dev",
+        "libxcb1-dev",
+        "libx11-xcb-dev",
+        "libxcb-glx0-dev",
+        "libxkbcommon-x11-dev",
+        "libxcb-keysyms1-dev",
+        "libxcb-image0-dev",
+        "libxcb-shm0-dev",
+        "libxcb-icccm4-dev",
+        "libxcb-sync0-dev",
+        "libxcb-xfixes0-dev",
+        "libxcb-shape0-dev",
+        "libxcb-randr0-dev",
+        "libxcb-render-util0-dev",
+        "libssl-dev",
+      ]
     state: present
   become: true
 
@@ -38,64 +59,64 @@
 
 - name: Install Qt Creator
   apt:
-    name: ['qtcreator']
+    name: ["qtcreator"]
     state: present
     install_recommends: no
   become: true
 
 - lineinfile:
-    destfile: "{{ homedir }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
-    line: '[Containments][2][Applets][3][Configuration][General]'
+    destfile: "{{ ansible_env.HOME }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+    line: "[Containments][2][Applets][3][Configuration][General]"
 
 - name: Set the favorites for the start menu
   lineinfile:
-    destfile: "{{ homedir }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
-    insertafter: '^[Containments][2][Applets][3][Configuration][General]'
-    regexp: '^favorites=preferred://.*'
-    line: 'favorites=preferred://browser,org.kde.dolphin.desktop,org.kde.kate.desktop,DigiaQt-qtcreator-community.desktop,systemsettings.desktop'
+    destfile: "{{ ansible_env.HOME }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+    insertafter: "^[Containments][2][Applets][3][Configuration][General]"
+    regexp: "^favorites=preferred://.*"
+    line: "favorites=preferred://browser,org.kde.dolphin.desktop,org.kde.kate.desktop,DigiaQt-qtcreator-community.desktop,systemsettings.desktop"
 
 - lineinfile:
-    destfile: "{{ homedir }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
-    line: '[Containments][2][Applets][5][Configuration][General]'
+    destfile: "{{ ansible_env.HOME }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+    line: "[Containments][2][Applets][5][Configuration][General]"
 
 - name: QtCreator - Make sure that the config directory exists
   file:
-    path: "{{ homedir }}/.config/QtProject/"
+    path: "{{ ansible_env.HOME }}/.config/QtProject/"
     state: directory
     recurse: yes
 - name: QtCreator - Copy config file
   copy:
     src: QtCreator.ini
-    dest: "{{ homedir }}/.config/QtProject/QtCreator.ini"
+    dest: "{{ ansible_env.HOME }}/.config/QtProject/QtCreator.ini"
     force: no
 - name: QtCreator - Configure Plugins (Category)
   lineinfile:
-    destfile: "{{ homedir }}/.config/QtProject/QtCreator.ini"
+    destfile: "{{ ansible_env.HOME }}/.config/QtProject/QtCreator.ini"
     line: "[Plugins]"
 - name: QtCreator - Configure Plugins (Enable)
   lineinfile:
-    destfile: "{{ homedir }}/.config/QtProject/QtCreator.ini"
-    regexp: '^ForceEnabled='
+    destfile: "{{ ansible_env.HOME }}/.config/QtProject/QtCreator.ini"
+    regexp: "^ForceEnabled="
     insertafter: "[Plugins]"
     line: "ForceEnabled=BareMetal, ClangCodeModel, ClangRefactoring, Todo"
 - name: QtCreator - Configure Plugins (Disable)
   lineinfile:
-    destfile: "{{ homedir }}/.config/QtProject/QtCreator.ini"
-    regexp: '^Ignored='
+    destfile: "{{ ansible_env.HOME }}/.config/QtProject/QtCreator.ini"
+    regexp: "^Ignored="
     insertafter: "[Plugins]"
     line: "Ignored=Bazaar, CVS, Mercurial, Perforce, QbsProjectManager, Qnx"
 - name: QtCreator - Set projects directory
   lineinfile:
-    destfile: "{{ homedir }}/.config/QtProject/QtCreator.ini"
-    regexp: '^Projects='
+    destfile: "{{ ansible_env.HOME }}/.config/QtProject/QtCreator.ini"
+    regexp: "^Projects="
     insertafter: "[Directories]"
-    line: "Projects={{ homedir }}/src"
+    line: "Projects={{ ansible_env.HOME }}/src"
 - name: QtCreator - Set template for build directory
   lineinfile:
-    destfile: "{{ homedir }}/.config/QtProject/QtCreator.ini"
-    regexp: '^BuildDirectory.Template='
+    destfile: "{{ ansible_env.HOME }}/.config/QtProject/QtCreator.ini"
+    regexp: "^BuildDirectory.Template="
     insertafter: "[Directories]"
-    line: "BuildDirectory.Template={{ homedir }}/build/%{JS: Util.asciify(\\\"%{CurrentProject:Name}-%{CurrentKit:FileSystemName}-%{CurrentBuild:Name}\\\")}"
+    line: "BuildDirectory.Template={{ ansible_env.HOME }}/build/%{JS: Util.asciify(\\\"%{CurrentProject:Name}-%{CurrentKit:FileSystemName}-%{CurrentBuild:Name}\\\")}"
 
 - name: Download the linuxdeployqt AppImage
   get_url:
